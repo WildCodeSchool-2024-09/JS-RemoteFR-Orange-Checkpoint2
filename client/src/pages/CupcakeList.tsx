@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import Cupcake from "../components/Cupcake";
 
@@ -43,31 +44,46 @@ function CupcakeList() {
   console.info(useLoaderData() as CupcakeArray);
 
   // Step 3: get all accessories
+  const accessories: { id: number; name: string; slug: string }[] = [];
 
   // Step 5: create filter state
+  const [filter, setFilter] = useState<number | null>(null);
 
   return (
     <>
       <h1>My cupcakes</h1>
       <form className="center">
-        <label htmlFor="cupcake-select">
-          {/* Step 5: use a controlled component for select */}
-          Filter by{" "}
-          <select id="cupcake-select">
-            <option value="">---</option>
-            {/* Step 4: add an option for each accessory */}
-          </select>
-        </label>
+        <label htmlFor="cupcake-select">Filter by{""}:</label>
+        {/* Step 5: use a controlled component for select */}
+        <select
+          id="cupcake-select"
+          value={filter ?? ""}
+          onChange={(e) =>
+            setFilter(e.target.value ? Number.parseInt(e.target.value) : null)
+          }
+        >
+          <option value="">---</option>
+          <option value="4">Wild</option>
+          <option value="5">Christmas Candy</option>
+          {/* Step 4: add an option for each accessory */}
+          {accessories.map((accessory) => (
+            <option key={accessory.id} value={accessory.id}>
+              {accessory.name}
+            </option>
+          ))}
+        </select>
       </form>
       <ul className="cupcake-list" id="cupcake-list">
-        {/* Step 2: repeat this block for each cupcake */}
-        {sampleCupcakes.map((cupcake) => (
-          <li key={cupcake.id} className="cupcake-item">
-            <Cupcake data={cupcake} />
-          </li>
-        ))}
         {/* Step 5: filter cupcakes before repeating */}
-        {/* end of block */}
+        {sampleCupcakes
+          .filter((cupcake) =>
+            filter ? cupcake.accessory_id === filter.toString() : true,
+          )
+          .map((cupcake) => (
+            <li key={cupcake.id} className="cupcake-item">
+              <Cupcake data={cupcake} />
+            </li>
+          ))}
       </ul>
     </>
   );
