@@ -10,9 +10,22 @@ Pour exemple, si ta fonction recevait le tableau ci-dessous en paramètre, tu de
 ["1:0", "2:0", "3:0", "4:4", "2:2", "3:3", "1:4", "2:3", "2:4", "3:3"]
 */
 
-function getPoints(results: string[]): number {
-  // Your code here !
-  return 0;
+function calculateScore(results: string[]): number {
+  let score = 0;
+
+  for (let i = 0; i < results.length; i++) {
+    let match = results[i].split(":"); 
+    let ourScore = parseInt(match[0]); 
+    let theirScore = parseInt(match[1]); 
+    if (ourScore > theirScore) {
+      score += 3; 
+    } else if (ourScore === theirScore) {
+      score += 1; 
+    }
+    
+  }
+
+  return score;
 }
 
-export default getPoints;
+export default calculateScore;
