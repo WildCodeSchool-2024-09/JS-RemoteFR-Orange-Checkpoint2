@@ -12,7 +12,7 @@ Exemples :
 function countLetters(givenString: string, letter: string): number {
   let nbLettre = 0;
 
-  for (let lettre of givenString) {
+  for (const lettre of givenString) {
     if (lettre === letter) {
       nbLettre++;
     }
