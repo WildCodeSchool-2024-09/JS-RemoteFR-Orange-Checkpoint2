@@ -2,7 +2,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
+import { CupcakeLoader } from "./pages/CupcakeList";
 /* ************************************************************************* */
 
 import App from "./App";
@@ -27,6 +27,7 @@ const router = createBrowserRouter([
       {
         path: "/cupcakes",
         element: <CupcakeList />,
+        loader: CupcakeLoader,
         // Step 1: load data here
       },
     ],

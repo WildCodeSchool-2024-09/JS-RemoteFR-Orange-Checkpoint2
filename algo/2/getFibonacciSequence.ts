@@ -16,17 +16,17 @@ function getFibonacciSequence(size: number): number[] {
     return [];
   }
 
-  let sequence: number[] = [0];
+  const sequence: number[] = [0];
   if (size === 1) {
     return sequence;
   }
 
-  let n1:number = 0;
-  let n2:number = 1;
+  let n1: number = 0;
+  let n2: number = 1;
   sequence.push(n2);
 
   for (let i = 2; i < size; i++) {
-    let somme: number = n1 + n2;
+    const somme: number = n1 + n2;
     sequence.push(somme);
     n1 = n2;
     n2 = somme;
