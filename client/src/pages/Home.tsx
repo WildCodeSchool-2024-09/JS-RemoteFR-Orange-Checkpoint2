@@ -10,6 +10,7 @@ const sampleData = {
   color2: "var(--default-cream-color)",
   color3: "var(--default-cream-color)",
   name: "",
+  id: 0,
 };
 
 function Home() {

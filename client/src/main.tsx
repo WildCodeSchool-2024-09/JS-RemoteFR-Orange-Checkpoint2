@@ -7,9 +7,11 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import App from "./App";
 
+import { cupcakeLoader } from "./main.tsxuseLoaderDataCupcakeList";
 import CupcakeList from "./pages/CupcakeList";
 import Home from "./pages/Home";
 import Instructions from "./pages/Instructions";
+import Cupcakes from "./pages/cupcakes";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,11 @@ const router = createBrowserRouter([
         path: "/cupcakes",
         element: <CupcakeList />,
         // Step 1: load data here
+        loader: cupcakeLoader,
+      },
+      {
+        path: "cupcakes/:id", // Route dynamique avec ":id"
+        element: <Cupcakes />,
       },
     ],
   },
