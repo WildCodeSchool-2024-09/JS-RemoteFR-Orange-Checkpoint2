@@ -1,37 +1,37 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 /* ************************************************************************* */
 
-import App from './App';
-import CupcakeList from './pages/CupcakeList';
-import Home from './pages/Home';
-import Instructions from './pages/Instructions';
+import App from "./App";
+import CupcakeList from "./pages/CupcakeList";
+import Home from "./pages/Home";
+import Instructions from "./pages/Instructions";
 
 const loadCupcakes = async () => {
-  const response = await fetch('http://localhost:3310/api/cupcakes');
+  const response = await fetch("http://localhost:3310/api/cupcakes");
   if (!response.ok) {
-    throw new Error('Failed to fetch cupcakes');
+    throw new Error("Failed to fetch cupcakes");
   }
   return response.json();
 };
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <App />,
     children: [
       {
-        path: '/',
+        path: "/",
         element: <Home />,
       },
       {
-        path: '/instructions',
+        path: "/instructions",
         element: <Instructions />,
       },
       {
-        path: '/cupcakes',
+        path: "/cupcakes",
         element: <CupcakeList />,
         loader: loadCupcakes, // Step 1: load data here
       },
@@ -42,7 +42,7 @@ const router = createBrowserRouter([
 /* ************************************************************************* */
 
 // Find the root element in the HTML document
-const rootElement = document.getElementById('root');
+const rootElement = document.getElementById("root");
 if (rootElement == null) {
   throw new Error(`Your HTML Document should contain a <div id="root"></div>`);
 }
@@ -51,5 +51,5 @@ if (rootElement == null) {
 createRoot(rootElement).render(
   <StrictMode>
     <RouterProvider router={router} />
-  </StrictMode>
+  </StrictMode>,
 );

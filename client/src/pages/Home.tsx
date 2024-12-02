@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './Home.css';
-import Cupcake from '../components/Cupcake';
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Home.css";
+import Cupcake from "../components/Cupcake";
 
 function Home() {
   interface Cupcake {
@@ -16,10 +16,10 @@ function Home() {
   const [cupcakes, setCupcakes] = useState<Cupcake[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:3310/api/cupcakes')
-      .then(response => response.json())
-      .then(data => setCupcakes(data))
-      .catch(error => console.error('Error fetching data:', error));
+    fetch("http://localhost:3310/api/cupcakes")
+      .then((response) => response.json())
+      .then((data) => setCupcakes(data))
+      .catch((error) => console.error("Error fetching data:", error));
   }, []);
 
   return (
