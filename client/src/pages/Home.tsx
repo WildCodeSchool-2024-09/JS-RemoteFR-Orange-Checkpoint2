@@ -1,23 +1,34 @@
-import { Link } from "react-router-dom";
-
-import "./Home.css";
-
-import Cupcake from "../components/Cupcake";
-
-const sampleData = {
-  accessory: "donut",
-  color1: "var(--default-cream-color)",
-  color2: "var(--default-cream-color)",
-  color3: "var(--default-cream-color)",
-  name: "",
-};
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import './Home.css';
+import Cupcake from '../components/Cupcake';
 
 function Home() {
+  interface Cupcake {
+    id: number;
+    accessory: string;
+    color1: string;
+    color2: string;
+    color3: string;
+    name: string;
+  }
+
+  const [cupcakes, setCupcakes] = useState<Cupcake[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3310/api/cupcakes')
+      .then(response => response.json())
+      .then(data => setCupcakes(data))
+      .catch(error => console.error('Error fetching data:', error));
+  }, []);
+
   return (
     <>
       <h1>Cupcake Union</h1>
       <div className="home-cupcake">
-        <Cupcake data={sampleData} />
+        {cupcakes.map((cupcake) => (
+          <Cupcake key={cupcake.id} data={cupcake} />
+        ))}
       </div>
       <div className="home-content">
         <p>
@@ -29,7 +40,7 @@ function Home() {
           ✔️ Filter them by accessory
         </p>
         <p>
-          Clic on <Link to="/instructions">Instructions</Link> to start !
+          Click on <Link to="/instructions">Instructions</Link> to start!
         </p>
       </div>
     </>
