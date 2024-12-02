@@ -46,7 +46,7 @@ type Accessory = {
 
 function CupcakeList() {
   // Step 1: get all cupcakes
-  console.info(useLoaderData() as CupcakeArray);
+  const cupcakes = useLoaderData() as CupcakeArray;
 
   const [accessories, setAccessories] = useState<Accessory[]>([]);
   const [selectedAccessory, setSelectedAccessory] = useState<string>("");
@@ -64,10 +64,8 @@ function CupcakeList() {
 
   // Step 5: create filter state
   const filteredCupcakes = selectedAccessory
-    ? sampleCupcakes.filter(
-        (cupcake) => cupcake.accessory_id === selectedAccessory,
-      )
-    : sampleCupcakes;
+    ? cupcakes.filter((cupcake) => cupcake.accessory_id === selectedAccessory)
+    : cupcakes;
 
   return (
     <>
